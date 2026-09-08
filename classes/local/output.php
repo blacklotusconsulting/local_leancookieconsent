@@ -69,7 +69,9 @@ class output {
             return '';
         }
 
-        $scripturl = new \moodle_url('/local/leancookieconsent/assets/lean-cookie-consent.js');
+        $assetpath = dirname(__DIR__, 2) . '/assets/lean-cookie-consent.js';
+        $assetrev = is_readable($assetpath) ? (string)filemtime($assetpath) : '1';
+        $scripturl = new \moodle_url('/local/leancookieconsent/assets/lean-cookie-consent.js', ['v' => $assetrev]);
 
         return \html_writer::tag(
             'script',
